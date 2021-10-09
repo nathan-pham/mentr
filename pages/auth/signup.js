@@ -11,7 +11,7 @@ export default function signUp() {
 
                 <div className="px-32 w-1/2 min-h-screen">
 
-                    <div className="flex items-center mt-10">
+                    <div className="flex items-center mt-12">
 
                         <img src="/icons/mentr.png" alt="Mentr Logo" className="w-14 h-14 mr-2" />
                         <h1 className="text-gray-700 text-xl">mentr</h1>
@@ -33,7 +33,7 @@ export default function signUp() {
 
                     </form>
 
-                    <footer className="h-10"></footer>
+                    <footer className="h-12"></footer>
 
                 </div>
 

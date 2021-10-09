@@ -1,7 +1,31 @@
 import Root from "@components/Root"
-import { SearchOutline } from "react-ionicons"
+import Search from "@components/dashboard/Search"
+import Title from "@components/dashboard/Title"
+import Mentor from "@components/dashboard/Mentor"
+import More from "@components/dashboard/More"
+
+function Topic({ text }) {
+
+    return (
+
+        <div className="border border-gray-400 rounded-md font-lg font-semibold p-4 text-center hover:border-blue-500">{ text }</div>
+
+    )
+
+}
 
 export default function Dashboard() {
+
+    const topics = [
+        "Python",
+        "Math",
+        "Data Science",
+        "Algebra",
+        "Machine Learning",
+        "Calculus",
+        "Django",
+        "Statistics"
+    ]
 
     return (
 
@@ -10,35 +34,66 @@ export default function Dashboard() {
 
             <div className="max-w-3xl mx-auto">
 
-                <header className="flex items-center justify-between mt-10">
+                <header className="flex items-center justify-between mt-12">
                     <img src="/icons/mentr.png" alt="Mentr Logo" className="w-14 h-14 " />
                 </header>
 
                 <main>
 
-                    <h1 className="mt-4 text-2xl text-gray-700">Hi, <span className="font-bold">Nathan</span> ✌<br />Find your new fav Mentr</h1>
+                    <h1 className="mt-4 text-2xl text-gray-700">Hi, <b>Nathan</b> ✌<br />Find your new fav Mentr</h1>
                 
-                    <article className="bg-blue-500 rounded-lg text-white p-4 mt-4">
-                        <div className="px-3 py-2 rounded-md bg-white flex items-center text-gray-400 focus-within:text-gray-700">
-                            <SearchOutline className="w-6 h-6 mr-2" style={{ color: "inherit" }} />
-                            <input className="outline-none w-full" placeholder="Search for a mentor or topic..." />
+                    <Search />
+
+                    <Title>Meet Mentors</Title>
+                    <div className="grid grid-cols-2 gap-4 mt-4">
+                        <Mentor />
+                        <Mentor />
+                        <Mentor />
+                        <Mentor />
+                        <Mentor />
+                        <Mentor />
+                    </div>
+
+                    <More>Mentors</More>
+
+                    <Title>Recommended Topics</Title>
+                    <div className="grid grid-cols-4 gap-4 mt-4">
+                        { topics.map((v, i) => <Topic text={ v } key={ i } />) }
+                    </div>
+
+                    <Title>Curated Resources</Title>
+                    <div className="grid grid-cols-3 gap-4 mt-4">
+                        <div>
+                            <img src="https://img-c.udemycdn.com/course/480x270/2769460_e60c.jpg" className="rounded-md" />
+
+                            <h1 className="text-lg font-semibold mt-3 leading-6">2021 Python for Machine Learning & Data Science</h1>
+                            <p className="text-gray-400 mt-1">Udemy</p>
                         </div>
+                        <div>
+                            <img src="https://img-c.udemycdn.com/course/480x270/2769460_e60c.jpg" className="rounded-md" />
 
-                        <div className="flex mt-6">
-                            <div className="w-3/5">
-                                <p>Get connected with hundreds of the best mentors, resources, and solutions. Learn and grow with Mentr, a platform created by students and run by students.</p>
-                                <button className="mt-4 px-3 py-2 rounded-md bg-white text-blue-500">Learn More</button>
-                            </div>
-
-                            <div className="w-2/5 flex justify-end">
-                                <img src="/undraw/learn.svg" alt="Undraw: Mentor Image" className="w-9/12"/>
-                            </div>
+                            <h1 className="text-lg font-semibold mt-3 leading-6">2021 Python for Machine Learning & Data Science</h1>
+                            <p className="text-gray-400 mt-1">FreeCodeCamp</p>
                         </div>
-                    </article>
+                        <div>
+                            <img src="https://img-c.udemycdn.com/course/480x270/2769460_e60c.jpg" className="rounded-md" />
 
+                            <h1 className="text-lg font-semibold mt-3 leading-6">2021 Python for Machine Learning & Data Science</h1>
+                            <p className="text-gray-400 mt-1">Youtube</p>
+                        </div>
+                    </div>
+                    <More>Resources</More>
+
+                    <Title>Best Snippets</Title>
+                    <div className="mt-4">
+                        <div className="rounded-md bg-black text-white p-4">
+                            <pre><code>print("Hello World")</code></pre>
+                        </div>
+                    </div>
+                    <More>Snippets</More>
                 </main>
 
-                <footer></footer>
+                <footer className="py-6"></footer>
 
             </div>
 
