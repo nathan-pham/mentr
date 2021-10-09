@@ -1,5 +1,4 @@
-// export Home component
-export default () => {
+export default function Home() {
     return (
         <div>
             bruh
