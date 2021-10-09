@@ -3,7 +3,7 @@ import * as utils from "@nathan-pham/utils"
 import cors from "cors"
 
 import { resolvers } from "@database/graphql/resolvers"
-import { typeDefs } from "@/database/graphql/typeDefs"
+import { typeDefs } from "@database/graphql/typeDefs"
 
 // initialize middleware
 const corsMiddleware = utils.next.middleware(cors({ methods: ["GET", "POST"] }))
