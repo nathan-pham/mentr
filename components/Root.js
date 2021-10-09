@@ -2,9 +2,11 @@ import Head from "next/head"
 
 export default function Root({
     children,
-    title="Home | Mentr", 
+    title="Home", 
     description="Mentr is an online learning platform and environment for programmers"
 }) {
+
+    title += " | Mentr"
 
     return (
 
