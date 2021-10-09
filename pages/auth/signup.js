@@ -27,7 +27,7 @@ export default function signUp() {
                         <Input name="email" label="Your email" placeholder="name@domain.com" required className="mt-4" />
                         <Input name="password" label="Password" placeholder="at least 8 characters" required className="mt-4" />
                         
-                        <button className="px-3 py-2 bg-blue-500 text-white rounded-lg mt-4">Register</button>
+                        <button className="px-3 py-2 bg-blue-500 text-white rounded-md mt-4">Register</button>
 
                         <p className="self-end text-gray-500 mt-4">Have an account? <a href="/auth/signin" className="text-blue-500 font-medium">Sign in</a></p>
 
