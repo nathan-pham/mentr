@@ -3,7 +3,7 @@ import Head from "next/head"
 export default function Root({
     children,
     title="Home", 
-    description="Mentr is an online learning platform and environment for programmers"
+    description="Mentr is an online learning platform and environment. Learn and grow with Mentr."
 }) {
 
     title += " | Mentr"
