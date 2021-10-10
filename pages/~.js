@@ -4,7 +4,7 @@ import TopicCard from "@components/dashboard/card/TopicCard"
 import Search from "@components/dashboard/Search"
 import Title from "@components/dashboard/Title"
 import More from "@components/dashboard/More"
-import Header from "@components/Header"
+import Header from "@components/navigation/Header"
 import Root from "@components/Root"
 
 import fetchAllUsers from "@database/deta/user/fetchAllUsers"
@@ -61,9 +61,9 @@ export default function Dashboard({ user, mentors }) {
 
                     <Title>Curated Resources</Title>
                     <div className="grid grid-cols-3 gap-4 mt-4">
-                        <ResourceCard image="https://img-c.udemycdn.com/course/480x270/2769460_e60c.jpg" title="2021 Python for Machine Learning & Data Science" source="text-gray-400 mt-1" />
-                        <ResourceCard image="https://img-c.udemycdn.com/course/480x270/2769460_e60c.jpg" title="2021 Python for Machine Learning & Data Science" source="text-gray-400 mt-1" />
-                        <ResourceCard image="https://img-c.udemycdn.com/course/480x270/2769460_e60c.jpg" title="2021 Python for Machine Learning & Data Science" source="text-gray-400 mt-1" />
+                        <ResourceCard image="https://img-c.udemycdn.com/course/480x270/2769460_e60c.jpg" title="2021 Python for Machine Learning & Data Science" source="Udemy" />
+                        <ResourceCard image="https://img-c.udemycdn.com/course/480x270/2769460_e60c.jpg" title="2021 Python for Machine Learning & Data Science" source="Udemy" />
+                        <ResourceCard image="https://img-c.udemycdn.com/course/480x270/2769460_e60c.jpg" title="2021 Python for Machine Learning & Data Science" source="Udemy" />
                     </div>
                     <More>Resources</More>
                     
