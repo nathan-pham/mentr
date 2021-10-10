@@ -11,7 +11,7 @@ export default function Settings({ user }) {
    
     const state = useStore(store)
     useEffect(() => { state.user.set(user) }, [])
-    
+
     return (
         <Root title="Settings">
             <div className="max-w-3xl mx-auto">
@@ -40,8 +40,8 @@ export default function Settings({ user }) {
 
                 <Title>Locked Settings</Title>
                 <p className="text-gray-400">These are your account settings that cannont be changed.</p>
-                <input value={ user.name } disabled className="rounded-md mt-4 px-3 py-2 border border-gray-400 cursor-not-allowed block w-60" />
-                <input value={ user.auth.email } disabled className="rounded-md mt-2 px-3 py-2 border border-gray-400 cursor-not-allowed block w-60" />
+                <input value={ user.name } disabled className="rounded-md mt-4 px-3 py-2 border border-gray-400 cursor-not-allowed block w-60 text-gray-700" />
+                <input value={ user.auth.email } disabled className="rounded-md mt-2 px-3 py-2 border border-gray-400 cursor-not-allowed block w-60 text-gray-700" />
 
                 <footer className="h-12"></footer>
             </div>

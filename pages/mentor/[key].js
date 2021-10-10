@@ -21,11 +21,16 @@ export default function Mentor({ user, mentor }) {
             <div className="max-w-3xl mx-auto">
                 <Header />
 
-                <img src={ mentor.image } alt="Mentor Image" className="mt-6 rounded-lg shadow-lg h-24 w-24 border border-gray-400" />
-                <h1 className="mt-4 text-4xl text-gray-700 font-semibold">{ mentor.name }</h1>
-                <p className="text-gray-400 text-lg mt-2 leading-5">{ title } <br/>{ mentor.karma } Karma</p>
+                <div className="flex">
+                    <img src={ mentor.image } alt="Mentor Image" className="mt-6 rounded-lg shadow-lg h-24 w-24 border border-gray-400 mr-4" />
 
-                <button className="rounded-md bg-blue-500 text-white px-3 py-2 mt-2 w-max cursor-pointer flex gap-2">Availability <CalendarOutline color="#fff" /></button>
+                    <div>
+                        <h1 className="mt-4 text-4xl text-gray-700 font-semibold">{ mentor.name }</h1>
+                        <p className="text-gray-400 text-lg mt-2 leading-5">{ title } <br/>{ mentor.karma } Karma</p>    
+                    </div>                
+                </div>
+
+                <button className="rounded-md bg-blue-500 text-white px-3 py-2 mt-4 w-max cursor-pointer flex gap-2">Availability <CalendarOutline color="#fff" /></button>
 
                 <Title>Experience</Title>
                 {
