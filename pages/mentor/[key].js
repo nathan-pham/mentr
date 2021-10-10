@@ -1,6 +1,17 @@
+import { useEffect } from "react"
+
+import store, { useStore } from "@components/state/store"
 import verifyUser from "@database/deta/user/verifyUser"
 
-export async function getServerSideProps({ req }) {
+export default function Mentor({ user }) {
+
+    const state = useStore(store)
+    useEffect(() => { state.user.set(user) }, [])
+
+    return <p>bruh</p>
+}
+
+export async function getServerSideProps({ req, params }) {
     const user = await verifyUser(req)
 
     if(user) {

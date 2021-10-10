@@ -14,21 +14,6 @@ import store, { useStore } from "@components/state/store"
 import fetchAllUsers from "@database/deta/user/fetchAllUsers"
 import verifyUser from "@database/deta/user/verifyUser"
 
-export async function getServerSideProps({ req  }) {
-    
-    const user = await verifyUser(req)
-    const mentors = await fetchAllUsers()
-
-    if(user) {
-        return {
-            props: { user, mentors }
-        }
-    } 
-
-    return { redirect: { permanent: false, destination: "/auth/signin" } }
-
-}
-
 // {"auth":{"email":"nathanpham.me@gmail.com","password":"$2b$10$A2tC23an/4eDMwdQ/up4Cuilxxwrw0oV8Ip4wSrNCtfs1ToKXFNDu"},"dates":[],"experience":[],"image":"/icons/mentr.png","karma":0,"key":"9dimgx0lqd7s","name":"Nathan","tags":[]}
 const topics = [
         "Python",
@@ -92,5 +77,20 @@ export default function Dashboard({ user, mentors }) {
             </div>
         </Root>
     )
+
+}
+
+export async function getServerSideProps({ req  }) {
+    
+    const user = await verifyUser(req)
+    const mentors = await fetchAllUsers()
+
+    if(user) {
+        return {
+            props: { user, mentors }
+        }
+    } 
+
+    return { redirect: { permanent: false, destination: "/auth/signin" } }
 
 }
