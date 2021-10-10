@@ -1,12 +1,35 @@
-import Root from "@components/Root"
 import Input from "@components/auth/Input"
+import Root from "@components/Root"
+
+import client, { gql } from "@components/client"
 
 export default function Signin() {
 
-    return (
+    const onSubmit = async (e) => {
 
+        e.preventDefault()
+
+        const inputs = [...e.target.querySelectorAll("input")]
+        const variables = inputs.reduce((acc, input) => ({ ...acc, [input.name]: input.value }), {})
+
+        client.query({
+            query: gql`
+                query Query {
+                    loginUser(email: "${ variables.email }", password: "${ variables.password }") {
+                        name
+                    }
+                }
+            `
+        }).then(console.log)
+            .catch(e => console.log("wrong password"))
+
+        return false
+
+    }
+
+  
+    return (
         <Root title="Sign In">
-            
             <div className="flex items-stretch">
 
                 <div className="px-32 w-1/2 min-h-screen">
@@ -21,10 +44,10 @@ export default function Signin() {
                     <h1 className="font-bold text-3xl text-gray-700 mt-16">Sign in</h1>
                     <p className="text-gray-500 mt-2">Log in to start learning from qualified mentors</p>
 
-                    <form className="flex flex-col mt-8">
+                    <form className="flex flex-col mt-8" onSubmit={ onSubmit }>
 
-                        <Input name="email" label="Your email" placeholder="name@domain.com" required />
-                        <Input name="password" label="Password" placeholder="at least 8 characters" required className="mt-4" />
+                        <Input name="email" label="Your email" type="email" placeholder="name@domain.com" required />
+                        <Input name="password" label="Password" type="password" placeholder="at least 8 characters" required className="mt-4" />
                         
                         <button className="px-3 py-2 bg-blue-500 text-white rounded-md mt-4">Log In</button>
 
@@ -41,9 +64,7 @@ export default function Signin() {
                 </div>
                 
             </div>
-            
         </Root>
-
     )
 
 }

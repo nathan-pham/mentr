@@ -24,8 +24,8 @@ export default function signUp() {
                     <form className="flex flex-col mt-6">
 
                         <Input name="email" label="Your name" placeholder="full name" required />
-                        <Input name="email" label="Your email" placeholder="name@domain.com" required className="mt-4" />
-                        <Input name="password" label="Password" placeholder="at least 8 characters" required className="mt-4" />
+                        <Input name="email" label="Your email" type="email" placeholder="name@domain.com" required className="mt-4" />
+                        <Input name="password" label="Password" type="password" placeholder="at least 8 characters" required className="mt-4" />
                         
                         <button className="px-3 py-2 bg-blue-500 text-white rounded-md mt-4">Register</button>
 
