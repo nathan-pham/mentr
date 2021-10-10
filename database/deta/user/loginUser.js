@@ -4,17 +4,6 @@ import { serialize } from "cookie"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 
-
-// import { serialize } from 'cookie';
-
-// function (req, res) {
-//    // ...
-//    // setHeader(headerName: string, cookies: string | string[])
-//    // can use array for multiple cookies
-//    res.setHeader('Set-Cookie', serialize('token', 'token_cookie_value', { path: '/' }));
-// }
-
-
 // export loginUser method
 export default async function loginUser(_, { email, password }, { res }) {
 

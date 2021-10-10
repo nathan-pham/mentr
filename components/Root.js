@@ -6,7 +6,7 @@ export default function Root({
     description="Mentr is an online learning platform and environment. Learn and grow with Mentr."
 }) {
 
-    title += " | Mentr"
+    title = "Mentr | " + title
 
     return (
 

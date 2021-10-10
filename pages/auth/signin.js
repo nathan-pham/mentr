@@ -1,9 +1,14 @@
-import Input from "@components/auth/Input"
-import Root from "@components/Root"
+import { useState } from "react"
 
 import client, { gql } from "@components/client"
+import Input from "@components/auth/Input"
+import Alert from "@components/Alert"
+import Root from "@components/Root"
 
-export default function Signin() {
+
+export default function signIn() {
+
+    const [ alerts, setAlerts ] = useState([])
 
     const onSubmit = async (e) => {
 
@@ -12,24 +17,41 @@ export default function Signin() {
         const inputs = [...e.target.querySelectorAll("input")]
         const variables = inputs.reduce((acc, input) => ({ ...acc, [input.name]: input.value }), {})
 
-        client.query({
-            query: gql`
-                query Query {
-                    loginUser(email: "${ variables.email }", password: "${ variables.password }") {
-                        name
+        try {
+            await client.query({
+                query: gql`
+                    query Query {
+                        loginUser(email: "${ variables.email }", password: "${ variables.password }") {
+                            name
+                        }
                     }
-                }
-            `
-        }).then(console.log)
-            .catch(e => console.log("wrong password"))
+                `
+            })
+
+            setAlerts([ ...alerts, { 
+                icon: "information", 
+                title: "Success!", 
+                description: "We're redirecting you to your dashboard." 
+            }])
+
+        } catch(e) {
+            console.log("[signin.js] email and password probably don't match")
+
+            setAlerts([ ...alerts, { 
+                title: "Retry that...", 
+                description: "That email and password did not match our records" 
+            }])
+        }
 
         return false
 
     }
 
-  
     return (
         <Root title="Sign In">
+
+            {  alerts.map((alert, i) => <Alert key={ i } { ...alert } />) }
+
             <div className="flex items-stretch">
 
                 <div className="px-32 w-1/2 min-h-screen">

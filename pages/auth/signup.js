@@ -1,11 +1,58 @@
-import Root from "@components/Root"
+import { useState } from "react"
+
+import client, { gql } from "@components/client"
+
 import Input from "@components/auth/Input"
+import Alert from "@components/Alert"
+import Root from "@components/Root"
 
 export default function signUp() {
+
+    const [ alerts, setAlerts ] = useState([])
+
+    const onSubmit = async (e) => {
+
+        e.preventDefault()
+
+        const inputs = [...e.target.querySelectorAll("input")]
+        const variables = inputs.reduce((acc, input) => ({ ...acc, [input.name]: input.value }), {})
+
+        try {
+            await client.query({
+                query: gql`
+                    mutation Mutation {
+                        createUser(name: "${ variables.name }", email: "${ variables.email }", password: "${ variables.password }") {
+                            name
+                        }                        
+                    }
+                `
+            })
+
+            setAlerts([ ...alerts, { 
+                icon: "information", 
+                title: "Success!", 
+                description: "You can now sign in with your acccount" 
+            }])
+
+        } catch(e) {
+            console.log("[signup.js] email already exists")
+
+            setAlerts([ ...alerts, { 
+                title: "Retry that...", 
+                description: "An account with a similar email already exists" 
+            }])
+        }
+
+        return false
+
+    }
+
 
     return (
 
         <Root title="Sign Up">
+
+            {  alerts.map((alert, i) => <Alert key={ i } { ...alert } />) }
             
             <div className="flex items-stretch">
 
@@ -21,7 +68,7 @@ export default function signUp() {
                     <h1 className="font-bold text-3xl text-gray-700 mt-16">Sign up</h1>
                     <p className="text-gray-500 mt-2">Create a free account to get full access to Mentr</p>
 
-                    <form className="flex flex-col mt-6">
+                    <form className="flex flex-col mt-6" onSubmit={ onSubmit }>
 
                         <Input name="email" label="Your name" placeholder="full name" required />
                         <Input name="email" label="Your email" type="email" placeholder="name@domain.com" required className="mt-4" />

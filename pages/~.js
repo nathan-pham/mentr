@@ -8,6 +8,18 @@ import More from "@components/dashboard/More"
 import Alert from "@components/Alert"
 import Root from "@components/Root"
 
+import verifyUser from "@database/deta/user/verifyUser"
+
+export async function getServerSideProps({ req  }) {
+    
+    const user = await verifyUser(req)
+
+    return user
+        ? { props: { user } }
+        : { redirect: { permanent: false, destination: "/auth/signin" } }
+
+}
+
 export default function Dashboard() {
 
     const topics = [

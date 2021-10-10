@@ -14,19 +14,22 @@ export default function Alert({ icon="error", title="Untitled Alert", descriptio
     const [ visible, setVisible ] = useState(true)
 
     useEffect(() => {
-        
-        timer = setTimeout(() => {
-            setVisible(!visible)
-            timer = null
-        }, 5000)
+
+        if(visible) {
+            timer = setTimeout(() => {
+                setVisible(!visible)
+                timer = null
+            }, 5000)
+        }
 
         return () => clearTimeout(timer)
+
     }, [])
 
     return (typeof document == "undefined" || !visible)
         ? null
         : createPortal(
-            <div className="fixed bottom-6 left-6 p-6 shadow-xl border border-gray-400 bg-white rounded-md max-w-xs">
+            <div className="fixed bottom-6 right-6 p-6 shadow-xl border border-gray-400 bg-white rounded-md max-w-xs">
                 
                 <div className="text-blue-500">
                     { 
