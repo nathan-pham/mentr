@@ -8,19 +8,27 @@ import More from "@components/dashboard/More"
 import Alert from "@components/Alert"
 import Root from "@components/Root"
 
+import fetchAllUsers from "@database/deta/user/fetchAllUsers"
 import verifyUser from "@database/deta/user/verifyUser"
 
 export async function getServerSideProps({ req  }) {
     
     const user = await verifyUser(req)
+    const mentors = await fetchAllUsers()
 
-    return user
-        ? { props: { user } }
-        : { redirect: { permanent: false, destination: "/auth/signin" } }
+    if(user) {
+        return {
+            props: { user, mentors }
+        }
+    } 
+
+    return { redirect: { permanent: false, destination: "/auth/signin" } }
 
 }
 
-export default function Dashboard() {
+// {"auth":{"email":"nathanpham.me@gmail.com","password":"$2b$10$A2tC23an/4eDMwdQ/up4Cuilxxwrw0oV8Ip4wSrNCtfs1ToKXFNDu"},"dates":[],"experience":[],"image":"/icons/mentr.png","karma":0,"key":"9dimgx0lqd7s","name":"Nathan","tags":[]}
+
+export default function Dashboard({ user, mentors }) {
 
     const topics = [
         "Python",
@@ -33,17 +41,9 @@ export default function Dashboard() {
         "Statistics"
     ]
 
-    const [alert, setAlert] = useState(false)
-
-    useEffect(() => {
-        setAlert(true)
-    }, [])
-
     return (
 
         <Root title="Dashboard">
-            
-            { alert && <Alert /> }
 
             <div className="max-w-3xl mx-auto">
 
@@ -53,18 +53,15 @@ export default function Dashboard() {
 
                 <main>
 
-                    <h1 className="mt-4 text-2xl text-gray-700">Hi, <b>Nathan</b> ✌<br />Find your new fav Mentr</h1>
+                    <h1 className="mt-4 text-2xl text-gray-700">Hi, <b>{ user.name }</b> ✌<br />Find your new fav Mentr</h1>
                 
                     <Search />
 
                     <Title>Meet Mentors</Title>
                     <div className="grid grid-cols-2 gap-4 mt-4">
-                        <MentorCard />
-                        <MentorCard />
-                        <MentorCard />
-                        <MentorCard />
-                        <MentorCard />
-                        <MentorCard />
+                        {
+                            mentors.map((mentor, i) => <MentorCard key={ i } { ...mentor } />)
+                        }
                     </div>
 
                     <More>Mentors</More>

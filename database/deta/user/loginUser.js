@@ -1,8 +1,8 @@
-import { users } from "@database/deta/base"
-
 import { serialize } from "cookie"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
+
+import { users } from "@database/deta/base"
 
 // export loginUser method
 export default async function loginUser(_, { email, password }, { res }) {

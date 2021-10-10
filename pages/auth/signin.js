@@ -1,3 +1,4 @@
+import { useRouter } from "next/router"
 import { useState } from "react"
 
 import client, { gql } from "@components/client"
@@ -5,10 +6,10 @@ import Input from "@components/auth/Input"
 import Alert from "@components/Alert"
 import Root from "@components/Root"
 
-
 export default function signIn() {
 
     const [ alerts, setAlerts ] = useState([])
+    const router = useRouter()
 
     const onSubmit = async (e) => {
 
@@ -33,6 +34,7 @@ export default function signIn() {
                 title: "Success!", 
                 description: "We're redirecting you to your dashboard." 
             }])
+            router.push("/~")
 
         } catch(e) {
             console.log("[signin.js] email and password probably don't match")
