@@ -39,7 +39,7 @@ export default function Mentor({ user, mentor }) {
                 {
                     mentor.experience.length > 0 
                         ? null
-                        : <p>No experience listed</p>
+                        : <p className="text-gray-400">No experience listed</p>
                 }
 
                 <Title>Reviews</Title>

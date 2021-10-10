@@ -1,5 +1,6 @@
 import createUser from "@database/deta/user/createUser"
 import loginUser from "@database/deta/user/loginUser"
+import { users } from "@database/deta/base"
 
 export const resolvers = {
 
@@ -11,7 +12,11 @@ export const resolvers = {
 
     Mutation: {
 
-        createUser
+        createUser,
+        updateUserImage: async (_, { key, image }) => {
+            await users.update({ image }, key)
+            return image
+        }
 
     }
 

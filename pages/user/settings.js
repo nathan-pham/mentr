@@ -4,8 +4,40 @@ import Header from "@components/navigation/Header"
 import Title from "@components/dashboard/Title"
 import Root from "@components/Root"
 
+import client, { gql } from "@components/state/client"
 import store, { useStore } from "@components/state/store"
+
 import verifyUser from "@database/deta/user/verifyUser"
+
+// const encodeBase64 = (file) => (
+//     new Promise((resolve, reject) => {
+//         const reader = new FileReader()
+//         reader.onload = () => resolve(reader.result)
+//         reader.onerror = (error) => reject(error)
+//         reader.readAsDataURL(file)
+//     })
+// )
+
+const resize = (image) => {
+    const canvas = document.createElement("canvas")
+    const max = 100
+    let { width, height } = image
+    
+    if(width > height && width > max) {
+        height *= max / width
+        width = max
+    } else if(height > max) {
+        width *= max / height
+        height = max
+    }
+
+    canvas.width = width
+    canvas.height = height
+    canvas.getContext("2d").drawImage(image, 0, 0, width, height)
+    console.log(canvas.toDataURL("image/jpeg"))
+    return canvas.toDataURL("image/jpeg")
+}
+
 
 export default function Settings({ user }) {
    
@@ -14,12 +46,24 @@ export default function Settings({ user }) {
 
     const previewRef = useRef(null)
 
-    const onChange = (e) => {
+    const onChange = async (e) => {
         const [ file ] = e.target.files
 
         if(file) {
             previewRef.current.src = URL.createObjectURL(file)
+            previewRef.current.onload = () => {
+                URL.revokeObjectURL(previewRef.current.src)
+                
+                client.mutate({
+                    mutation: gql`
+                        mutation Mutation {
+                            updateUserImage(key: "${ user.key }", image: "${ resize(previewRef.current) }")
+                        }
+                    `
+                }).then(console.log)
+            }
         }
+
     }
 
     return (
@@ -49,7 +93,7 @@ export default function Settings({ user }) {
                 </button>
 
                 <Title>Locked Settings</Title>
-                <p className="text-gray-400">These are your account settings that cannont be changed.</p>
+                <p className="text-gray-400">These are your account settings that cannot be changed.</p>
                 <input value={ user.name } disabled className="rounded-md mt-4 px-3 py-2 border border-gray-400 cursor-not-allowed block w-60 text-gray-700" />
                 <input value={ user.auth.email } disabled className="rounded-md mt-2 px-3 py-2 border border-gray-400 cursor-not-allowed block w-60 text-gray-700" />
 
