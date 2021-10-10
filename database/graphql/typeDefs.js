@@ -52,7 +52,7 @@ export const typeDefs = gql`
 
     type Query {
 
-        Hello: String!
+        loginUser(email: String!, password: String!): User!
 
     }
 

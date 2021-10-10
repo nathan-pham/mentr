@@ -1,17 +1,17 @@
 import createUser from "@database/deta/user/createUser"
+import loginUser from "@database/deta/user/loginUser"
 
 export const resolvers = {
 
     Query: {
 
-        // (_, args)
-        Hello: () => "Hello World",
-        
+        loginUser
+
     },
 
     Mutation: {
 
-        createUser: (_, args) => createUser(args)
+        createUser
 
     }
 
