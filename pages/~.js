@@ -88,7 +88,7 @@ export default function Dashboard({ user, mentors }) {
                     <More>Snippets</More>
                 </main>
 
-                <footer className="py-6"></footer>
+                <footer className="h-12"></footer>
             </div>
         </Root>
     )
