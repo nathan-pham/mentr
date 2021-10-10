@@ -6,7 +6,7 @@ import Input from "@components/auth/Input"
 import Alert from "@components/Alert"
 import Root from "@components/Root"
 
-export default function signUp() {
+export default function SignUp() {
 
     const [ alerts, setAlerts ] = useState([])
 

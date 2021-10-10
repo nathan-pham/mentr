@@ -6,7 +6,7 @@ import Input from "@components/auth/Input"
 import Alert from "@components/Alert"
 import Root from "@components/Root"
 
-export default function signIn() {
+export default function SignIn() {
 
     const [ alerts, setAlerts ] = useState([])
     const router = useRouter()

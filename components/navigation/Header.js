@@ -1,4 +1,5 @@
 import { MailOutline, SettingsOutline, AddOutline } from "react-ionicons"
+import Link from "next/link"
 
 import store, { useStore } from "@components/state/store"
 import HeaderLink from "./HeaderLink"
@@ -9,7 +10,11 @@ export default function Header() {
 
     return (
         <header className="flex items-center justify-between mt-12">
-            <img src="/icons/mentr.png" alt="Mentr Logo" className="w-14 h-14 " />
+            <Link href="/~">
+                <a className="cursor-pointer">
+                    <img src="/icons/mentr.png" alt="Mentr Logo" className="w-14 h-14 " />
+                </a>
+            </Link>
 
             <nav className="flex gap-4">
                 { state.user.get().auth.email == "nathanpham.me@gmail.com"
