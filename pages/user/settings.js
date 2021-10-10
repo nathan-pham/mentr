@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 
 import Header from "@components/navigation/Header"
 import Title from "@components/dashboard/Title"
@@ -12,6 +12,16 @@ export default function Settings({ user }) {
     const state = useStore(store)
     useEffect(() => { state.user.set(user) }, [])
 
+    const previewRef = useRef(null)
+
+    const onChange = (e) => {
+        const [ file ] = e.target.files
+
+        if(file) {
+            previewRef.current.src = URL.createObjectURL(file)
+        }
+    }
+
     return (
         <Root title="Settings">
             <div className="max-w-3xl mx-auto">
@@ -22,12 +32,12 @@ export default function Settings({ user }) {
 
                 <Title>Profile Picture</Title>
                 <div className="flex mt-4">
-                    <img src={ user.image } alt="Profile Image" className="rounded-lg shadow-lg h-24 w-24 border border-gray-400 mr-4" />
+                    <img src={ user.image } alt="Profile Image" ref={ previewRef } className="rounded-lg shadow-lg h-24 w-24 border border-gray-400 mr-4 object-cover" />
                     <div>
                         <p className="text-gray-400">Upload a new profile picture. Your account will be terminated if it is not safe for work or includes inappropriate content.</p>
 
                         <label className="rounded-md bg-blue-500 text-white px-3 py-2 block mt-2 w-max cursor-pointer">
-                            <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" className="hidden" />
+                            <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" className="hidden" onChange={ onChange } />
                             Upload Image
                         </label>
                     </div>

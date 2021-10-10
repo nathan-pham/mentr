@@ -22,7 +22,7 @@ export default function Mentor({ user, mentor }) {
                 <Header />
 
                 <div className="flex">
-                    <img src={ mentor.image } alt="Mentor Image" className="mt-6 rounded-lg shadow-lg h-24 w-24 border border-gray-400 mr-4" />
+                    <img src={ mentor.image } alt="Mentor Image" className="mt-6 rounded-lg shadow-lg h-24 w-24 border border-gray-400 mr-4 object-cover" />
 
                     <div>
                         <h1 className="mt-4 text-4xl text-gray-700 font-semibold">{ mentor.name }</h1>
