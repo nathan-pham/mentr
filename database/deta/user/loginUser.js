@@ -1,6 +1,19 @@
 import { users } from "@database/deta/base"
+
+import { serialize } from "cookie"
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
+
+
+// import { serialize } from 'cookie';
+
+// function (req, res) {
+//    // ...
+//    // setHeader(headerName: string, cookies: string | string[])
+//    // can use array for multiple cookies
+//    res.setHeader('Set-Cookie', serialize('token', 'token_cookie_value', { path: '/' }));
+// }
+
 
 // export loginUser method
 export default async function loginUser(_, { email, password }, { res }) {
@@ -15,9 +28,7 @@ export default async function loginUser(_, { email, password }, { res }) {
         const expiresIn = new Date().getTime() * 60 * 60 * 1000
         const token = jwt.sign({ email }, `${process.env.JWT_SECRET}`, { algorithm: "HS512", expiresIn })
     
-        typeof res.cookie == "function"
-            ? res.cookie("JWT_TOKEN", token, { httpOnly: true, secure: true })
-            : console.log("[loginUser.js] res.cookie is not a function")
+        res.setHeader("Set-Cookie", serialize("JWT_TOKEN", token, { path: '/', httpOnly: true }))
 
         // return the user with the JWT token
         return {
