@@ -6,6 +6,6 @@ export default function More({ children, ...props }) {
             <button className="px-3 py-2 rounded-md bg-blue-500 text-white" { ...props }>More { children }</button>
         </div>
 
-    )    
+    )
 
 }

@@ -6,12 +6,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "@apollo/client": "^3.4.16",
     "@nathan-pham/utils": "^1.0.2",
     "apollo-server-micro": "^3.3.0",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "deta": "^1.0.1",
+    "gsap": "^3.8.0",
     "jsonwebtoken": "^8.5.1",
     "next": "latest",
     "react": "^17.0.2",

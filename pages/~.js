@@ -1,9 +1,12 @@
-import Root from "@components/Root"
-import Search from "@components/dashboard/Search"
-import Title from "@components/dashboard/Title"
+import { useState, useEffect } from "react"
+
 import MentorCard from "@components/dashboard/card/MentorCard"
 import TopicCard from "@components/dashboard/card/TopicCard"
+import Search from "@components/dashboard/Search"
+import Title from "@components/dashboard/Title"
 import More from "@components/dashboard/More"
+import Alert from "@components/Alert"
+import Root from "@components/Root"
 
 export default function Dashboard() {
 
@@ -18,10 +21,17 @@ export default function Dashboard() {
         "Statistics"
     ]
 
+    const [alert, setAlert] = useState(false)
+
+    useEffect(() => {
+        setAlert(true)
+    }, [])
+
     return (
 
         <Root title="Dashboard">
-
+            
+            { alert && <Alert /> }
 
             <div className="max-w-3xl mx-auto">
 
