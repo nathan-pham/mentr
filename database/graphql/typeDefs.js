@@ -55,7 +55,6 @@ export const typeDefs = gql`
         image: String!
         title: String!
         company: String!
-        dates: String!
 
     }
 

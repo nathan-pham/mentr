@@ -1,7 +1,8 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useState, useRef } from "react"
 
 import Header from "@components/navigation/Header"
 import Title from "@components/dashboard/Title"
+import Input from "@components/auth/Input"
 import Root from "@components/Root"
 
 import client, { gql } from "@components/state/client"
@@ -9,18 +10,9 @@ import store, { useStore } from "@components/state/store"
 
 import verifyUser from "@database/deta/user/verifyUser"
 
-// const encodeBase64 = (file) => (
-//     new Promise((resolve, reject) => {
-//         const reader = new FileReader()
-//         reader.onload = () => resolve(reader.result)
-//         reader.onerror = (error) => reject(error)
-//         reader.readAsDataURL(file)
-//     })
-// )
-
 const resize = (image) => {
     const canvas = document.createElement("canvas")
-    const max = 100
+    const max = 192
     let { width, height } = image
     
     if(width > height && width > max) {
@@ -38,6 +30,50 @@ const resize = (image) => {
     return canvas.toDataURL("image/jpeg")
 }
 
+function Experience({ image, title, company }) {
+    return (
+        <div className="flex p-4 border border-gray-400 rounded-lg items-center mt-2">
+            <img src={ image } alt="Company Logo" className="h-10 w-10 object-cover mr-4" />
+            <div>
+                <h1 className="font-semibold text-lg">{ company }</h1>
+                <p className="text-gray-400">{ title }</p>
+            </div>
+        </div>
+    )
+}
+
+function ExperienceModal({ setVisible, onSubmit }) {
+    
+    const onClick = (e) => {
+        e.preventDefault()
+        setVisible(false)
+        return false
+    }
+
+    const keepModal = (e) => {
+        e.stopPropagation()
+    }
+
+    return (
+        <div className="fixed bg-opacity-30 bg-black top-0 left-0 w-screen h-screen flex items-center justify-center" onClick={ onClick }>
+            <div className="flex flex-col bg-white p-4 border border-gray-400 shadow-lg rounded-lg w-96" onClick={ keepModal }>
+                <h1 className="text-2xl font-semibold">Add Experience</h1>
+                
+                <form onSubmit={ onSubmit }>
+                    <Input name="company" label="Company name" placeholder="Google" required className="mt-6" />
+                    <Input name="image" label="Company logo" placeholder="/google.png" required className="mt-4" />
+                    <Input name="title" label="Job title" placeholder="UI/UX Designer" required className="mt-4" />
+
+                    <div className="flex gap-4 mt-4">
+                        <a className="border border-blue-500 text-blue-500 px-3 py-2 rounded-md cursor-pointer" onClick={ onClick }>Cancel</a> 
+                        <button className="bg-blue-500 text-white px-3 py-2 rounded-md">Create</button>            
+                    </div>
+                </form>
+            </div>
+        </div>
+    )
+
+}
 
 export default function Settings({ user }) {
    
@@ -45,6 +81,8 @@ export default function Settings({ user }) {
     useEffect(() => { state.user.set(user) }, [])
 
     const previewRef = useRef(null)
+    const [ experiences, setExperiences ] = useState(user.experiences || [])
+    const [ visible, setVisible ] = useState(false)
 
     const onChange = async (e) => {
         const [ file ] = e.target.files
@@ -64,6 +102,20 @@ export default function Settings({ user }) {
             }
         }
 
+    }
+
+    const onSubmit = async (e) => {
+        e.preventDefault()
+
+        const inputs = [...e.target.querySelectorAll("input")]
+        const variables = inputs.reduce((acc, input) => ({ ...acc, [input.name]: input.value }), {})
+
+        setExperiences([ ...experiences, variables ])
+        setVisible(false)
+    }
+
+    const onClick = () => {
+        setVisible(true)
     }
 
     return (
@@ -89,11 +141,18 @@ export default function Settings({ user }) {
 
                 <Title>Experience</Title>
                 <p className="text-gray-400">Add the universities, institutions, or companies you've worked or studied at</p>
-                <button className="rounded-md bg-blue-500 text-white px-3 py-2 block mt-2">Add Experience
-                </button>
+                {
+                    experiences.length > 0
+                        ? experiences.map((experience, i) => <Experience {...experience} key={i} />)
+                        : <button className="rounded-md bg-blue-500 text-white px-3 py-2 block mt-2" onClick={ onClick }>Add Experience
+                        </button>
+                }
+                {
+                    visible && <ExperienceModal setVisible={ setVisible } onSubmit={ onSubmit } />
+                }
 
                 <Title>Locked Settings</Title>
-                <p className="text-gray-400">These are your account settings that cannot be changed.</p>
+                <p className="text-gray-400">These are your account settings that cannot be changed. If you need to edit a locked setting, contact <a href="mailto:nathanpham.me@gmail.com">nathanpham.me@gmail.com</a></p>
                 <input value={ user.name } disabled className="rounded-md mt-4 px-3 py-2 border border-gray-400 cursor-not-allowed block w-60 text-gray-700" />
                 <input value={ user.auth.email } disabled className="rounded-md mt-2 px-3 py-2 border border-gray-400 cursor-not-allowed block w-60 text-gray-700" />
 
