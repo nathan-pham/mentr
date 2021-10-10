@@ -30,7 +30,10 @@ export default function Mentor({ user, mentor }) {
                     </div>                
                 </div>
 
-                <button className="rounded-md bg-blue-500 text-white px-3 py-2 mt-4 w-max cursor-pointer flex gap-2">Availability <CalendarOutline color="#fff" /></button>
+                <div className="flex mt-6">
+                    <button className="rounded-md bg-blue-500 text-white px-3 py-2 w-max cursor-pointer flex gap-2 mr-4">Availability <CalendarOutline color="#fff" /></button>
+                    <button className="rounded-md border border-blue-500 text-blue-500 px-3 py-2 w-max cursor-pointer">Upvote</button>
+                </div>
 
                 <Title>Experience</Title>
                 {
