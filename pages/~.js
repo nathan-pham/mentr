@@ -1,3 +1,5 @@
+import { useEffect } from "react"
+
 import ResourceCard from "@components/dashboard/card/ResourceCard"
 import MentorCard from "@components/dashboard/card/MentorCard"
 import TopicCard from "@components/dashboard/card/TopicCard"
@@ -6,6 +8,8 @@ import Title from "@components/dashboard/Title"
 import More from "@components/dashboard/More"
 import Header from "@components/navigation/Header"
 import Root from "@components/Root"
+
+import store, { useStore } from "@components/state/store"
 
 import fetchAllUsers from "@database/deta/user/fetchAllUsers"
 import verifyUser from "@database/deta/user/verifyUser"
@@ -26,10 +30,7 @@ export async function getServerSideProps({ req  }) {
 }
 
 // {"auth":{"email":"nathanpham.me@gmail.com","password":"$2b$10$A2tC23an/4eDMwdQ/up4Cuilxxwrw0oV8Ip4wSrNCtfs1ToKXFNDu"},"dates":[],"experience":[],"image":"/icons/mentr.png","karma":0,"key":"9dimgx0lqd7s","name":"Nathan","tags":[]}
-
-export default function Dashboard({ user, mentors }) {
-
-    const topics = [
+const topics = [
         "Python",
         "Math",
         "Data Science",
@@ -39,6 +40,12 @@ export default function Dashboard({ user, mentors }) {
         "Django",
         "Statistics"
     ]
+export default function Dashboard({ user, mentors }) {
+
+    const state = useStore(store)
+    useEffect(() => {
+        state.user.set(user)
+    }, [])
 
     return (
         <Root title="Dashboard">

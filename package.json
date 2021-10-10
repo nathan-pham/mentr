@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.4.16",
+    "@hookstate/core": "^3.0.13",
     "@nathan-pham/utils": "^1.0.2",
     "apollo-server-micro": "^3.3.0",
     "bcrypt": "^5.0.1",

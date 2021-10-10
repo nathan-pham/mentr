@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-import client, { gql } from "@components/client"
+import client, { gql } from "@components/state/client"
 
 import Input from "@components/auth/Input"
 import Alert from "@components/Alert"
