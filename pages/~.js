@@ -15,22 +15,13 @@ import fetchAllUsers from "@database/deta/user/fetchAllUsers"
 import verifyUser from "@database/deta/user/verifyUser"
 
 // {"auth":{"email":"nathanpham.me@gmail.com","password":"$2b$10$A2tC23an/4eDMwdQ/up4Cuilxxwrw0oV8Ip4wSrNCtfs1ToKXFNDu"},"dates":[],"experience":[],"image":"/icons/mentr.png","karma":0,"key":"9dimgx0lqd7s","name":"Nathan","tags":[]}
-const topics = [
-        "Python",
-        "Math",
-        "Data Science",
-        "Algebra",
-        "Machine Learning",
-        "Calculus",
-        "Django",
-        "Statistics"
-    ]
+
+const topics = [ "Python", "Math", "Data Science", "Algebra", "Machine Learning", "Calculus", "Django", "Statistics" ]
+
 export default function Dashboard({ user, mentors }) {
 
     const state = useStore(store)
-    useEffect(() => {
-        state.user.set(user)
-    }, [])
+    useEffect(() => { state.user.set(user) }, [])
 
     return (
         <Root title="Dashboard">
@@ -45,7 +36,7 @@ export default function Dashboard({ user, mentors }) {
                     <Title>Meet Mentors</Title>
                     <div className="grid grid-cols-2 gap-4 mt-4">
                         {
-                            mentors.map((mentor, i) => <MentorCard key={ i } { ...mentor } />)
+                            mentors.map((mentor, i) => <MentorCard { ...mentor } _key={ mentor.key } key={ i } />)
                         }
                     </div>
 

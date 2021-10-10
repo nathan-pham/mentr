@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Link from "next/link"
 
 import client, { gql } from "@components/state/client"
 
@@ -18,8 +19,8 @@ export default function SignUp() {
         const variables = inputs.reduce((acc, input) => ({ ...acc, [input.name]: input.value }), {})
 
         try {
-            await client.query({
-                query: gql`
+            await client.mutate({
+                mutation: gql`
                     mutation Mutation {
                         createUser(name: "${ variables.name }", email: "${ variables.email }", password: "${ variables.password }") {
                             name
@@ -36,7 +37,7 @@ export default function SignUp() {
 
         } catch(e) {
             console.log("[signup.js] email already exists")
-
+            console.log(e)
             setAlerts([ ...alerts, { 
                 title: "Retry that...", 
                 description: "An account with a similar email already exists" 
@@ -70,13 +71,13 @@ export default function SignUp() {
 
                     <form className="flex flex-col mt-6" onSubmit={ onSubmit }>
 
-                        <Input name="email" label="Your name" placeholder="full name" required />
+                        <Input name="name" label="Your name" placeholder="full name" required />
                         <Input name="email" label="Your email" type="email" placeholder="name@domain.com" required className="mt-4" />
                         <Input name="password" label="Password" type="password" placeholder="at least 8 characters" required className="mt-4" />
                         
                         <button className="px-3 py-2 bg-blue-500 text-white rounded-md mt-4">Register</button>
 
-                        <p className="self-end text-gray-500 mt-4">Have an account? <a href="/auth/signin" className="text-blue-500 font-medium">Sign in</a></p>
+                        <p className="self-end text-gray-500 mt-4">Have an account? <Link href="/auth/signin"><a className="text-blue-500 font-medium">Sign in</a></Link></p>
 
                     </form>
 

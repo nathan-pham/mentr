@@ -1,5 +1,6 @@
 import { useRouter } from "next/router"
 import { useState } from "react"
+import Link from "next/link"
 
 import client, { gql } from "@components/state/client"
 import Input from "@components/auth/Input"
@@ -75,7 +76,7 @@ export default function SignIn() {
                         
                         <button className="px-3 py-2 bg-blue-500 text-white rounded-md mt-4">Log In</button>
 
-                        <p className="self-end text-gray-500 mt-4">Don't have an account? <a href="/auth/signup" className="text-blue-500 font-medium">Sign up</a></p>
+                        <p className="self-end text-gray-500 mt-4">Don't have an account? <Link href="/auth/signup"><a className="text-blue-500 font-medium">Sign up</a></Link></p>
 
                     </form>
 

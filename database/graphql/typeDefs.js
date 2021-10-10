@@ -32,12 +32,21 @@ export const typeDefs = gql`
         tags: [String]
         dates: [String]
         experience: [Experience]
+        reviews: [Review]
 
         image: String!
         name: String!
         karma: Int!
 
         auth: Authentication!
+
+    }
+    
+    type Review {
+
+        image: String!
+        name: String!
+        text: String!
 
     }
 
