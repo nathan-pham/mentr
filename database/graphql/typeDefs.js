@@ -21,16 +21,13 @@ export const typeDefs = gql`
 
         key: ID!
 
-        image: String!
-        name: String!
-        job: String!
-        university: String!
-        karma: Int!
         tags: [String]!
         dates: [String]!
         experience: [Experience]!
 
-        # TODO: add reviews
+        image: String!
+        name: String!
+        karma: Int!
 
         auth: {
 

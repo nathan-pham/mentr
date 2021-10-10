@@ -1,18 +1,9 @@
 import Root from "@components/Root"
 import Search from "@components/dashboard/Search"
 import Title from "@components/dashboard/Title"
-import Mentor from "@components/dashboard/Mentor"
+import MentorCard from "@components/dashboard/card/MentorCard"
+import TopicCard from "@components/dashboard/card/TopicCard"
 import More from "@components/dashboard/More"
-
-function Topic({ text }) {
-
-    return (
-
-        <div className="border border-gray-400 rounded-md font-lg font-semibold p-4 text-center hover:border-blue-500">{ text }</div>
-
-    )
-
-}
 
 export default function Dashboard() {
 
@@ -46,20 +37,15 @@ export default function Dashboard() {
 
                     <Title>Meet Mentors</Title>
                     <div className="grid grid-cols-2 gap-4 mt-4">
-                        <Mentor />
-                        <Mentor />
-                        <Mentor />
-                        <Mentor />
-                        <Mentor />
-                        <Mentor />
+                        <MentorCard />
+                        <MentorCard />
+                        <MentorCard />
+                        <MentorCard />
+                        <MentorCard />
+                        <MentorCard />
                     </div>
 
                     <More>Mentors</More>
-
-                    <Title>Recommended Topics</Title>
-                    <div className="grid grid-cols-4 gap-4 mt-4">
-                        { topics.map((v, i) => <Topic text={ v } key={ i } />) }
-                    </div>
 
                     <Title>Curated Resources</Title>
                     <div className="grid grid-cols-3 gap-4 mt-4">
@@ -83,6 +69,11 @@ export default function Dashboard() {
                         </div>
                     </div>
                     <More>Resources</More>
+                    
+                    <Title>Recommended Topics</Title>
+                    <div className="grid grid-cols-4 gap-4 mt-4">
+                        { topics.map((v, i) => <TopicCard text={ v } key={ i } />) }
+                    </div>
 
                     <Title>Best Snippets</Title>
                     <div className="mt-4">
