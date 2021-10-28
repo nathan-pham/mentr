@@ -2,7 +2,7 @@ export default function ResourceCard({ image, title, source }) {
     
     return (
         <div>
-            <img src={ image } className="rounded-md" />
+            <img src={ image } className="rounded-md object-cover h-40 w-full" />
 
             <h1 className="text-lg font-semibold mt-3 leading-6">{ title }</h1>
             <p className="text-gray-400 mt-1">{ source }</p>

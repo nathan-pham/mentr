@@ -16,7 +16,7 @@ import verifyUser from "@database/deta/user/verifyUser"
 
 // {"auth":{"email":"nathanpham.me@gmail.com","password":"$2b$10$A2tC23an/4eDMwdQ/up4Cuilxxwrw0oV8Ip4wSrNCtfs1ToKXFNDu"},"dates":[],"experience":[],"image":"/icons/mentr.png","karma":0,"key":"9dimgx0lqd7s","name":"Nathan","tags":[]}
 
-const topics = [ "Python", "Math", "Data Science", "Algebra", "Machine Learning", "Calculus", "Django", "Statistics" ]
+const topics = [ "Awarness", "Brain Exercises", "Mindfulness", "Meditation", "Understanding", "Thoughts", "Compassion", "Learning" ]
 
 export default function Dashboard({ user, mentors }) {
 
@@ -44,9 +44,9 @@ export default function Dashboard({ user, mentors }) {
 
                     <Title>Curated Resources</Title>
                     <div className="grid grid-cols-3 gap-4 mt-4">
-                        <ResourceCard image="https://img-c.udemycdn.com/course/480x270/2769460_e60c.jpg" title="2021 Python for Machine Learning & Data Science" source="Udemy" />
-                        <ResourceCard image="https://img-c.udemycdn.com/course/480x270/2769460_e60c.jpg" title="2021 Python for Machine Learning & Data Science" source="Udemy" />
-                        <ResourceCard image="https://img-c.udemycdn.com/course/480x270/2769460_e60c.jpg" title="2021 Python for Machine Learning & Data Science" source="Udemy" />
+                        <ResourceCard image="https://img-c.udemycdn.com/course/480x270/1746608_d226_4.jpg" title="CBT for Depression, Anxiety, Phobias and Panic Attacks" source="Udemy" />
+                        <ResourceCard image="https://mhanational.org/sites/default/files/free-to-use-sounds-1xT5Yz2Am0M-unsplash%20(1)_0.jpg" title="Mental Health America Website" source="Mental Health America" />
+                        <ResourceCard image="https://img-c.udemycdn.com/course/480x270/2769460_e60c.jpg" title="Digital Awareness & the Effects of Computers" source="Udemy" />
                     </div>
                     <More>Resources</More>
                     
@@ -56,9 +56,15 @@ export default function Dashboard({ user, mentors }) {
                     </div>
 
                     <Title>Best Snippets</Title>
-                    <div className="mt-4">
-                        <div className="rounded-md bg-black text-white p-4">
-                            <pre><code>print("Hello World")</code></pre>
+                    <div >
+                        <div className="rounded-md bg-gray-100 text-gray-700 p-4 mt-4">
+                        Our greatest glory is not in never falling, but in rising every time we fall.
+                        </div>
+                        <div className="rounded-md bg-gray-100 text-gray-700 p-4 mt-4">
+                        Magic is believing in yourself, if you can do that, you can make anything happen.
+                        </div>
+                        <div className="rounded-md bg-gray-100 text-gray-700 p-4 mt-4">
+                        All our dreams can come true, if we have the courage to pursue them.
                         </div>
                     </div>
                     <More>Snippets</More>
